@@ -1,0 +1,18 @@
+{
+  "SelectLanguage": {
+    "title": "Select Language"
+  },
+  "Login": {
+    "title": "Phoolwala",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "or": "or",
+    "loginBtn": "Login",
+    "loginGoogle": "Login with Google",
+    "loginApple": "Login with Apple"
+  },
+  "Home": {
+    "title": "Welcome to React Native Boilerplate"
+  }
+}

@@ -1,0 +1,43 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"*": [
+				"./src/*"
+			],
+			"@navigation": [
+				"./src/navigation/*"
+			],
+			"@screens": [
+				"./src/screens/*"
+			],
+			"@redux": [
+				"./src/redux/*"
+			],
+			"@action": [
+				"./src/redux/action/*"
+			],
+			"@utils": [
+				"./src/utils/*"
+			],
+			"@icons": [
+				"./assets/constants/icons"
+			],
+			"@images": [
+				"./assets/constants/images.js"
+			],
+			"@components": [
+				"./src/components/*"
+			],
+			"@shared": [
+				"./src/components/shared/*"
+			],
+			"@theme": [
+				"./src/theme"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules"
+	]
+}
