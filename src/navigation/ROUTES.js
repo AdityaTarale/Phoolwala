@@ -20,7 +20,10 @@ const ROUTES = {
   NOTIFICATIONS: 'Notifications',
   PROFILE: 'Profile',
   SETTINGS: 'Settings',
-  SUPPORT: 'Support'
+  SUPPORT: 'Support',
+  CART: 'Cart',
+  CATEGORY: 'Category',
+  PRODUCT_INFO: 'ProductInfo'
 };
 
 export default ROUTES;

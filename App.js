@@ -27,6 +27,16 @@ const App = () => {
   };
 
   const theme = createTheme({
+    components: {
+      Card: {
+        containerStyle: { borderRadius: 12, marginHorizontal: 0 }
+      },
+      Text: {
+        h4Style: {
+          fontSize: 18
+        }
+      }
+    },
     Button: {
       raised: true
     },

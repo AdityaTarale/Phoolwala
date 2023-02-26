@@ -15,14 +15,14 @@
 	"diffEditor.originalEditable": true,
 	// Vscode peacock extension theme
 	"workbench.colorCustomizations": {
-		"activityBar.activeBackground": "#FFC0CB",
-		"activityBar.background": "#FFC0CB",
+		"activityBar.activeBackground": "#ffc0cb",
+		"activityBar.background": "#ffc0cb",
 		"activityBar.foreground": "#15202b",
 		"activityBar.inactiveForeground": "#15202b99",
 		"activityBarBadge.background": "#20bf00",
 		"activityBarBadge.foreground": "#e7e7e7",
 		"commandCenter.border": "#15202b99",
-		"sash.hoverBorder": "#FFC0CB",
+		"sash.hoverBorder": "#ffc0cb",
 		"statusBar.background": "#ffc0cb",
 		"statusBar.foreground": "#15202b",
 		"statusBarItem.hoverBackground": "#ff8da1",

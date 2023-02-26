@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { LoginScreen, SelectLanguageScreen } from '@screens';
+import { LoginScreen, SelectLanguageScreen, SignUpScreen } from '@screens';
 
 import ROUTES from './ROUTES';
 
@@ -23,6 +23,13 @@ export const AuthStack = () => {
           headerShown: false
         }}
         component={LoginScreen}
+      />
+      <Stack.Screen
+        name={ROUTES.SIGNUP}
+        options={{
+          headerShown: false
+        }}
+        component={SignUpScreen}
       />
       <Stack.Screen
         name={ROUTES.SELECT_LANGUAGE}

@@ -37,7 +37,7 @@ export const AppStack = () => {
       <Tab.Screen
         name={ROUTES.NOTIFICATIONS_STACK}
         options={{
-          tabBarIcon: ({ color, size }) => <Icon name="bell" color={color} size={size} />
+          tabBarIcon: ({ color, size }) => <Icon name="map-pin" color={color} size={size} />
         }}
       >
         {() => <NotificationsStack />}
@@ -45,7 +45,7 @@ export const AppStack = () => {
       <Tab.Screen
         name={ROUTES.SETTINGS_STACK}
         options={{
-          tabBarIcon: ({ color, size }) => <Icon name="settings" color={color} size={size} />
+          tabBarIcon: ({ color, size }) => <Icon name="calendar" color={color} size={size} />
         }}
       >
         {() => <SettingsStack />}

@@ -3,14 +3,24 @@
     "title": "Select Language"
   },
   "Login": {
-    "title": "Phoolwala",
-    "username": "Username",
+    "title": "Login to Phoolwala",
+    "username": "email",
     "password": "Password",
     "email": "Email",
     "or": "or",
     "loginBtn": "Login",
     "loginGoogle": "Login with Google",
     "loginApple": "Login with Apple"
+  },
+  "SignUp": {
+    "title": "Register",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "or": "or",
+    "signUpBtn": "Sign up",
+    "signUpGoogle": "Sign up with Google",
+    "signUpApple": "Sign up with Apple"
   },
   "Home": {
     "title": "Welcome to React Native Boilerplate"

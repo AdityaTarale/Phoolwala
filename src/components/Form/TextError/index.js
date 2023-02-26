@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text } from '@rneui/base';
+import { Text } from '@rneui/themed';
 import PropTypes from 'prop-types';
 
 const propTypes = {

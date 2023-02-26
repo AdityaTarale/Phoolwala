@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import { FormikControl, NavLink } from '@components';
 import ROUTES from '@navigation/ROUTES';
 import { Button, Icon } from '@rneui/themed';
-import { loginFormValidation } from '@utils';
+import { signUpFormValidation } from '@utils';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 
 const initialValues = {
+  name: '',
   email: '',
+  mobileNo: '',
   password: ''
 };
 
@@ -18,25 +20,41 @@ const propTypes = {
 
 const defaultProps = {};
 
-export const LoginForm = ({ t }) => {
+export const SignUpForm = ({ t }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={() => {}}
-      validationSchema={loginFormValidation}
+      validationSchema={signUpFormValidation}
     >
       {({ values, handleChange, handleSubmit }) => {
         return (
           <>
             <FormikControl
               type="input"
+              name="name"
+              placeholder="Name"
+              value={values.name}
+              handleChange={handleChange}
+              leftIcon={<Icon name="user" type="feather" size={24} color="gray" />}
+            />
+            <FormikControl
+              type="input"
               name="email"
               placeholder="Email"
               value={values.email}
               handleChange={handleChange}
-              leftIcon={<Icon name="email" size={24} color="gray" />}
+              leftIcon={<Icon name="mail" size={24} color="gray" />}
+            />
+            <FormikControl
+              type="input"
+              name="mobileNo"
+              placeholder="Mobile No"
+              value={values.mobileNo}
+              handleChange={handleChange}
+              leftIcon={<Icon name="phone" size={24} color="gray" />}
             />
             <FormikControl
               type="input"
@@ -56,12 +74,12 @@ export const LoginForm = ({ t }) => {
               }
             />
             <Button
-              title={t('Login.loginBtn')}
+              title={t('SignUp.signUpBtn')}
               containerStyle={{ width: '95%' }}
               onPress={handleSubmit}
             />
-            <NavLink screen={ROUTES.SIGNUP} params={{}}>
-              Don't have an account ? Signup
+            <NavLink screen={ROUTES.LOGIN} params={{}}>
+              Already a user? Login
             </NavLink>
           </>
         );
@@ -70,5 +88,5 @@ export const LoginForm = ({ t }) => {
   );
 };
 
-LoginForm.propTypes = propTypes;
-LoginForm.defaultProps = defaultProps;
+SignUpForm.propTypes = propTypes;
+SignUpForm.defaultProps = defaultProps;
