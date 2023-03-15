@@ -119,7 +119,13 @@ const en = {
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
   },
-  // @demo remove-block-end
+  // @demo remove-block-end,
+  userNavigator: {
+    homeTab: "Home",
+    categoryTab: "Category",
+    cartTab: "Cart",
+    profileTab: "Profile",
+  },
 }
 
 export default en

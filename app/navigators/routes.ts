@@ -3,7 +3,9 @@ export const ROUTES = {
   Welcome: "Welcome",
 
   // Auth
+  Auth: "Auth",
   Login: "Login",
+  Register: "Register",
   DemoShowroom: "DemoShowroom",
   DemoCommunity: "DemoCommunity",
   DemoPodcastList: "DemoPodcastList",
@@ -11,7 +13,8 @@ export const ROUTES = {
 
   // User
   User: {
-    Stack: "UserStack",
+    App: "UserApp",
+    HomeStack: "HomeStack",
     Home: "Home",
   },
   // Merchant

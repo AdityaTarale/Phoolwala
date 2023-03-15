@@ -9,15 +9,15 @@ import { Screen, Text } from "../../components"
 
 // STOP! READ ME FIRST!
 // To fix the TS error below, you'll need to add the following things in your navigation config:
-// - Add `Home: undefined` to AppStackParamList
+// - Add `Register: undefined` to AppStackParamList
 // - Import your screen, and add it to the stack:
-//     `<Stack.Screen name="Home" component={HomeScreen} />`
+//     `<Stack.Screen name="Register" component={RegisterScreen} />`
 // Hint: Look for the 🔥!
 
 // REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
 // @ts-ignore
-export const HomeScreen: FC<StackScreenProps<AppStackScreenProps, "Home">> = observer(
-  function HomeScreen() {
+export const RegisterScreen: FC<StackScreenProps<AppStackScreenProps, "Register">> = observer(
+  function RegisterScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
@@ -25,7 +25,7 @@ export const HomeScreen: FC<StackScreenProps<AppStackScreenProps, "Home">> = obs
     // const navigation = useNavigation()
     return (
       <Screen style={$root} preset="scroll">
-        <Text text="home" />
+        <Text text="register" />
       </Screen>
     )
   },

@@ -21,9 +21,10 @@ import {
   LoginScreen, // @demo remove-current-line
   WelcomeScreen,
 } from "../screens"
-import { UserNavigator, UserTabParamList } from "./UserNavigator" // @demo remove-current-line
+import { UserNavigator, UserTabParamList } from "./User/UserNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { ROUTES } from "./routes"
+import { AuthNavigator } from "./AuthNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -40,8 +41,8 @@ import { ROUTES } from "./routes"
  */
 export type AppStackParamList = {
   Welcome: undefined
-  Login: undefined // @demo remove-current-line
-  UserStack: NavigatorScreenParams<UserTabParamList> // @demo remove-current-line
+  Auth: undefined // @demo remove-current-line
+  UserApp: NavigatorScreenParams<UserTabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
 }
 
@@ -69,7 +70,7 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? "Welcome" : "Login"} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? "Welcome" : "Auth"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
@@ -81,13 +82,13 @@ const AppStack = observer(function AppStack() {
           />
           {/* @demo remove-block-start */}
           <Stack.Screen
-            name={ROUTES.User.Stack as keyof AppStackParamList}
+            name={ROUTES.User.App as keyof AppStackParamList}
             component={UserNavigator}
           />
         </>
       ) : (
         <>
-          <Stack.Screen name={ROUTES.Login as keyof AppStackParamList} component={LoginScreen} />
+          <Stack.Screen name={ROUTES.Auth as keyof AppStackParamList} component={AuthNavigator} />
         </>
       )}
       {/* @demo remove-block-end */}

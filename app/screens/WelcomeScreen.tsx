@@ -27,7 +27,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   } = useStores()
 
   function goNext() {
-    navigation.navigate("UserStack", { screen: "DemoShowroom" })
+    navigation.navigate("UserApp", { screen: "HomeStack" })
   }
 
   useHeader({
