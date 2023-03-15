@@ -23,6 +23,7 @@ import {
 } from "../screens"
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import { ROUTES } from "./routes"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -74,13 +75,13 @@ const AppStack = observer(function AppStack() {
       {isAuthenticated ? (
         <>
           {/* @demo remove-block-end */}
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen name={ROUTES.Welcome} component={WelcomeScreen} />
           {/* @demo remove-block-start */}
-          <Stack.Screen name="Demo" component={DemoNavigator} />
+          <Stack.Screen name={ROUTES.Demo} component={DemoNavigator} />
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name={ROUTES.Login} component={LoginScreen} />
         </>
       )}
       {/* @demo remove-block-end */}

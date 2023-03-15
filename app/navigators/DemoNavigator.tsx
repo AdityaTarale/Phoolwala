@@ -9,6 +9,7 @@ import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen } from "../scr
 import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import { ROUTES } from "./routes"
 
 export type DemoTabParamList = {
   DemoCommunity: undefined
@@ -45,7 +46,7 @@ export function DemoNavigator() {
       }}
     >
       <Tab.Screen
-        name="DemoShowroom"
+        name={ROUTES.DemoShowroom}
         component={DemoShowroomScreen}
         options={{
           tabBarLabel: translate("demoNavigator.componentsTab"),
@@ -56,7 +57,7 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name="DemoCommunity"
+        name={ROUTES.DemoCommunity}
         component={DemoCommunityScreen}
         options={{
           tabBarLabel: translate("demoNavigator.communityTab"),
@@ -67,7 +68,7 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name="DemoPodcastList"
+        name={ROUTES.DemoPodcastList}
         component={DemoPodcastListScreen}
         options={{
           tabBarLabel: translate("demoNavigator.podcastListTab"),
@@ -78,7 +79,7 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name="DemoDebug"
+        name={ROUTES.DemoDebug}
         component={DemoDebugScreen}
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
