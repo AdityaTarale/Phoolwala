@@ -21,7 +21,7 @@ import {
   LoginScreen, // @demo remove-current-line
   WelcomeScreen,
 } from "../screens"
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
+import { UserNavigator, UserTabParamList } from "./UserNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { ROUTES } from "./routes"
 
@@ -41,7 +41,7 @@ import { ROUTES } from "./routes"
 export type AppStackParamList = {
   Welcome: undefined
   Login: undefined // @demo remove-current-line
-  Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  UserStack: NavigatorScreenParams<UserTabParamList> // @demo remove-current-line
   // 🔥 Your screens go here
 }
 
@@ -75,13 +75,19 @@ const AppStack = observer(function AppStack() {
       {isAuthenticated ? (
         <>
           {/* @demo remove-block-end */}
-          <Stack.Screen name={ROUTES.Welcome} component={WelcomeScreen} />
+          <Stack.Screen
+            name={ROUTES.Welcome as keyof AppStackParamList}
+            component={WelcomeScreen}
+          />
           {/* @demo remove-block-start */}
-          <Stack.Screen name={ROUTES.Demo} component={DemoNavigator} />
+          <Stack.Screen
+            name={ROUTES.User.Stack as keyof AppStackParamList}
+            component={UserNavigator}
+          />
         </>
       ) : (
         <>
-          <Stack.Screen name={ROUTES.Login} component={LoginScreen} />
+          <Stack.Screen name={ROUTES.Login as keyof AppStackParamList} component={LoginScreen} />
         </>
       )}
       {/* @demo remove-block-end */}

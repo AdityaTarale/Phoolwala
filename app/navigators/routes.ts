@@ -10,7 +10,10 @@ export const ROUTES = {
   DemoDebug: "DemoDebug",
 
   // User
-  User: {},
+  User: {
+    Stack: "UserStack",
+    Home: "Home",
+  },
   // Merchant
   Merchant: {},
   // Delivery Boy

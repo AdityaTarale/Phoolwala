@@ -1,6 +1,12 @@
+/**
+|--------------------------------------------------
+| User Navigator only for users routing purpose
+|--------------------------------------------------
+*/
+
+import React from "react"
 import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { CompositeScreenProps } from "@react-navigation/native"
-import React from "react"
 import { TextStyle, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Icon } from "../components"
@@ -11,7 +17,7 @@ import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 import { ROUTES } from "./routes"
 
-export type DemoTabParamList = {
+export type UserTabParamList = {
   DemoCommunity: undefined
   DemoShowroom: { queryIndex?: string; itemIndex?: string }
   DemoDebug: undefined
@@ -23,14 +29,14 @@ export type DemoTabParamList = {
  *
  * More info: https://reactnavigation.org/docs/typescript/#organizing-types
  */
-export type DemoTabScreenProps<T extends keyof DemoTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<DemoTabParamList, T>,
+export type UserTabScreenProps<T extends keyof UserTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<UserTabParamList, T>,
   AppStackScreenProps<keyof AppStackParamList>
 >
 
-const Tab = createBottomTabNavigator<DemoTabParamList>()
+const Tab = createBottomTabNavigator<UserTabParamList>()
 
-export function DemoNavigator() {
+export function UserNavigator() {
   const { bottom } = useSafeAreaInsets()
 
   return (
@@ -46,7 +52,7 @@ export function DemoNavigator() {
       }}
     >
       <Tab.Screen
-        name={ROUTES.DemoShowroom as keyof DemoTabParamList}
+        name={ROUTES.DemoShowroom as keyof UserTabParamList}
         component={DemoShowroomScreen}
         options={{
           tabBarLabel: translate("demoNavigator.componentsTab"),
@@ -57,7 +63,7 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name={ROUTES.DemoCommunity as keyof DemoTabParamList}
+        name={ROUTES.DemoCommunity as keyof UserTabParamList}
         component={DemoCommunityScreen}
         options={{
           tabBarLabel: translate("demoNavigator.communityTab"),
@@ -68,7 +74,7 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name={ROUTES.DemoPodcastList as keyof DemoTabParamList}
+        name={ROUTES.DemoPodcastList as keyof UserTabParamList}
         component={DemoPodcastListScreen}
         options={{
           tabBarLabel: translate("demoNavigator.podcastListTab"),
@@ -79,7 +85,7 @@ export function DemoNavigator() {
       />
 
       <Tab.Screen
-        name={ROUTES.DemoDebug as keyof DemoTabParamList}
+        name={ROUTES.DemoDebug as keyof UserTabParamList}
         component={DemoDebugScreen}
         options={{
           tabBarLabel: translate("demoNavigator.debugTab"),
@@ -107,5 +113,3 @@ const $tabBarLabel: TextStyle = {
   lineHeight: 16,
   flex: 1,
 }
-
-// @demo remove-file
