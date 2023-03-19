@@ -1,6 +1,6 @@
 /**
 |--------------------------------------------------
-| User Navigator only for users routing purpose
+| Admin Navigator only for users routing purpose
 |--------------------------------------------------
 */
 
@@ -9,20 +9,18 @@ import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigatio
 import { CompositeScreenProps } from "@react-navigation/native"
 import { TextStyle, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-// import { Icon } from "../../components"
-//  <Icon icon="components" color={focused && colors.tint} size={30} />
-import Icon from "react-native-vector-icons/Feather"
+import { Icon } from "../../components"
 import { translate } from "../../i18n"
-import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen } from "../../screens"
+import { DemoCommunityScreen, DemoDebugScreen } from "../../screens"
 import { DemoPodcastListScreen } from "../../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../../theme"
 import { AppStackParamList, AppStackScreenProps } from "../AppNavigator"
 import { ROUTES } from "../routes"
-import { UserHomeStackNavigator } from "./UserHomeStackNavigator"
+import { AdminHomeStackNavigator } from "./AdminHomeStackNavigator"
 
-export type UserTabParamList = {
-  DemoCommunity: undefined
+export type AdminTabParamList = {
   HomeStack: { queryIndex?: string; itemIndex?: string }
+  DemoCommunity: undefined
   DemoDebug: undefined
   DemoPodcastList: undefined
 }
@@ -32,14 +30,14 @@ export type UserTabParamList = {
  *
  * More info: https://reactnavigation.org/docs/typescript/#organizing-types
  */
-export type UserTabScreenProps<T extends keyof UserTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<UserTabParamList, T>,
+export type AdminTabScreenProps<T extends keyof AdminTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<AdminTabParamList, T>,
   AppStackScreenProps<keyof AppStackParamList>
 >
 
-const Tab = createBottomTabNavigator<UserTabParamList>()
+const Tab = createBottomTabNavigator<AdminTabParamList>()
 
-export function UserNavigator() {
+export function AdminNavigator() {
   const { bottom } = useSafeAreaInsets()
 
   return (
@@ -55,46 +53,46 @@ export function UserNavigator() {
       }}
     >
       <Tab.Screen
-        name={ROUTES.User.HomeStack as keyof UserTabParamList}
+        name={ROUTES.Admin.HomeStack as keyof AdminTabParamList}
         // component={DemoShowroomScreen}
-        component={UserHomeStackNavigator}
+        component={AdminHomeStackNavigator}
         options={{
           tabBarLabel: translate("userNavigator.homeTab"),
-          tabBarIcon: ({ focused, color }) => (
-            <Icon name="home" color={focused ? colors.tint : color} size={28} />
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="components" color={focused && colors.tint} size={30} />
           ),
         }}
       />
 
       <Tab.Screen
-        name={ROUTES.DemoCommunity as keyof UserTabParamList}
+        name={ROUTES.DemoCommunity as keyof AdminTabParamList}
         component={DemoCommunityScreen}
         options={{
           tabBarLabel: translate("userNavigator.categoryTab"),
-          tabBarIcon: ({ focused, color }) => (
-            <Icon name="grid" color={focused ? colors.tint : color} size={28} />
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="components" color={focused && colors.tint} size={30} />
           ),
         }}
       />
 
       <Tab.Screen
-        name={ROUTES.DemoPodcastList as keyof UserTabParamList}
+        name={ROUTES.DemoPodcastList as keyof AdminTabParamList}
         component={DemoPodcastListScreen}
         options={{
           tabBarLabel: translate("userNavigator.cartTab"),
-          tabBarIcon: ({ focused, color }) => (
-            <Icon name="shopping-cart" color={focused ? colors.tint : color} size={28} />
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="components" color={focused && colors.tint} size={30} />
           ),
         }}
       />
 
       <Tab.Screen
-        name={ROUTES.DemoDebug as keyof UserTabParamList}
+        name={ROUTES.DemoDebug as keyof AdminTabParamList}
         component={DemoDebugScreen}
         options={{
           tabBarLabel: translate("userNavigator.profileTab"),
-          tabBarIcon: ({ focused, color }) => (
-            <Icon name="user" color={focused ? colors.tint : color} size={28} />
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="components" color={focused && colors.tint} size={30} />
           ),
         }}
       />

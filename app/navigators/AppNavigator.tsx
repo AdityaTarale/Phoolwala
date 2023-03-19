@@ -17,14 +17,11 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
-import {
-  LoginScreen, // @demo remove-current-line
-  WelcomeScreen,
-} from "../screens"
 import { UserNavigator, UserTabParamList } from "./User/UserNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { ROUTES } from "./routes"
 import { AuthNavigator } from "./AuthNavigator"
+import { AdminNavigator } from "./Admin/AdminNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -63,7 +60,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 const AppStack = observer(function AppStack() {
   // @demo remove-block-start
   const {
-    authenticationStore: { isAuthenticated },
+    authenticationStore: { isAuthenticated, user },
   } = useStores()
 
   // @demo remove-block-end
@@ -73,18 +70,21 @@ const AppStack = observer(function AppStack() {
       initialRouteName={isAuthenticated ? "Welcome" : "Auth"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
-      {isAuthenticated ? (
+      {isAuthenticated && user?.role ? (
         <>
-          {/* @demo remove-block-end */}
-          <Stack.Screen
-            name={ROUTES.Welcome as keyof AppStackParamList}
-            component={WelcomeScreen}
-          />
           {/* @demo remove-block-start */}
-          <Stack.Screen
-            name={ROUTES.User.App as keyof AppStackParamList}
-            component={UserNavigator}
-          />
+          {user.role === "user" && (
+            <Stack.Screen
+              name={ROUTES.User.App as keyof AppStackParamList}
+              component={UserNavigator}
+            />
+          )}
+          {user.role === "admin" && (
+            <Stack.Screen
+              name={ROUTES.Admin.App as keyof AppStackParamList}
+              component={AdminNavigator}
+            />
+          )}
         </>
       ) : (
         <>

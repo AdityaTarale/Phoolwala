@@ -1,10 +1,12 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { Dimensions, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../../../navigators"
-import { Screen, Text } from "../../../components"
+import { AutoImage, Box, Screen } from "../../../components"
 import { spacing } from "../../../theme"
+import { useHeader } from "../../../utils/useHeader"
+import { CategoryList } from "./CategoryList"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -19,19 +21,39 @@ import { spacing } from "../../../theme"
 // @ts-ignore
 export const UserHomeScreen: FC<StackScreenProps<AppStackScreenProps, "UserHome">> = observer(
   function UserHomeScreen() {
+    const goTo = () => {
+      //
+    }
+
+    const { width } = Dimensions.get("window")
+
+    useHeader({
+      title: "Face of New Market",
+      rightIcon: "bell",
+      onRightPress: goTo,
+    })
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
     // const navigation = useNavigation()
+
     return (
       <Screen
         style={$root}
         preset="scroll"
-        safeAreaEdges={["top"]}
+        safeAreaEdges={["bottom"]}
         contentContainerStyle={$container}
       >
-        <Text text="userHome" />
+        <Box>
+          <AutoImage
+            maxWidth={width - spacing.large - spacing.large}
+            source={{
+              uri: "https://i.pinimg.com/originals/5e/c1/e4/5ec1e4334c19f6310a1edb1ca71e94a0.jpg",
+            }}
+          />
+        </Box>
+        <CategoryList />
       </Screen>
     )
   },
@@ -42,7 +64,7 @@ const $root: ViewStyle = {
 }
 
 const $container: ViewStyle = {
-  paddingTop: spacing.large + spacing.extraLarge,
+  // paddingTop: spacing.large + spacing.extraLarge,
   paddingBottom: spacing.huge,
   paddingHorizontal: spacing.large,
 }

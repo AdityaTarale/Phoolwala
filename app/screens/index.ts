@@ -9,3 +9,4 @@ export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here
 export * from "./UserScreen/UserHome"
 export * from "./AuthScreen/RegisterScreen"
+export * from "./AdminScreen/AdminHome/AdminHomeScreen"

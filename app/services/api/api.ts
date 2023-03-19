@@ -14,9 +14,12 @@ import Config from "../../config"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem" // @demo remove-current-line
 import type {
   ApiConfig,
-  ApiFeedResponse, // @demo remove-current-line
+  ApiFeedResponse,
+  LoginData,
+  LoginResponse, // @demo remove-current-line
 } from "./api.types"
 import type { EpisodeSnapshotIn } from "../../models/Episode" // @demo remove-current-line
+import { API_URL } from "../../utils/apiConfig"
 
 /**
  * Configuring the apisauce instance.
@@ -82,6 +85,61 @@ export class Api {
     }
   }
   // @demo remove-block-end
+
+  async login(values: {
+    mobileNo: string
+    password: string
+  }): Promise<{ kind: "ok"; userData: LoginData } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<LoginResponse> = await this.apisauce.post(API_URL.login(), values)
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", userData: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async register(values: {
+    fullName: string
+    email: string
+    mobileNo: string
+    password: string
+  }): Promise<{ kind: "ok"; userData: LoginData } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<LoginResponse> = await this.apisauce.post(
+      API_URL.register(),
+      values,
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", userData: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
 }
 
 // Singleton instance of the API for convenience

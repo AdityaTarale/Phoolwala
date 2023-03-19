@@ -22,7 +22,11 @@ export const ROUTES = {
   // Delivery Boy
   DeliveryBoy: {},
   // Admin
-  Admin: {},
+  Admin: {
+    App: "AdminApp",
+    HomeStack: "HomeStack",
+    Home: "Home",
+  },
 }
 
 export enum ROLES {

@@ -48,3 +48,29 @@ export interface ApiConfig {
    */
   timeout: number
 }
+
+export interface LoginData {
+  user: {
+    _id: string
+    fullName: string
+    merchantName: string
+    email: string
+    password: string
+    mobileNo: number
+    otp: null | number
+    role: string
+    status: number
+    is_deleted: number
+    createdAt: string
+    updatedAt: string
+    __v: number
+  }
+  token: string
+}
+
+export interface LoginResponse {
+  code: number
+  status: number
+  message: string
+  data: LoginData
+}
