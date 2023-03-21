@@ -6,7 +6,7 @@ export const API_URL = {
   // User
 
   // Admin
-
+  getProducts: () => "/products/getProduct",
   // Merchant
 
   // Delivery boy
