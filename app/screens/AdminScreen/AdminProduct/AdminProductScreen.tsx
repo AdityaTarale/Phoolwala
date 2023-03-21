@@ -1,12 +1,21 @@
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, FlatList, View, ImageStyle, TouchableOpacity } from "react-native"
+import {
+  ViewStyle,
+  FlatList,
+  View,
+  ImageStyle,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { AutoImage, Box, Screen, Text } from "../../../components"
+import { AutoImage, Box, Button, Screen, Text } from "../../../components"
 import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigator"
 import { useHeader } from "../../../utils/useHeader"
 import { colors, spacing } from "../../../theme"
 import { goBack } from "../../../navigators"
+import { apiAdmin } from "../../../services/admin-api"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -32,13 +41,20 @@ export const AdminProductScreen: FC<StackScreenProps<AdminNavigatorParamList, "A
     // Pull in navigation via hook
     // const navigation = useNavigation()
 
-    const [products, setProducts] = useState<any>(myProductDummyData)
+    const [products, setProducts] = useState<any>()
 
-    // useEffect(() => {
-    //   fetch("https://www.phoolvala.com/products/getProduct")
-    //     .then((res: any) => console.log("aditya", res))
-    //     .catch((err) => console.warn(err))
-    // }, [])
+    useEffect(() => {
+      ;(async () => {
+        try {
+          const response = await apiAdmin.getProducts()
+          if (response.kind === "ok") {
+            setProducts(response.products)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      })()
+    }, [])
 
     const renderItem = ({ item }) => {
       return (
@@ -64,10 +80,26 @@ export const AdminProductScreen: FC<StackScreenProps<AdminNavigatorParamList, "A
 
     return (
       <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
-        <FlatList
-          data={products}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={$separator} />}
+        <Box flex={1}>
+          <ScrollView horizontal>
+            <FlatList
+              ListEmptyComponent={
+                <Box width="100%" alignItems="center" justifyContent="center">
+                  <ActivityIndicator />
+                </Box>
+              }
+              data={products}
+              renderItem={renderItem}
+              ItemSeparatorComponent={() => <View style={$separator} />}
+            />
+          </ScrollView>
+        </Box>
+        <Button
+          testID="add-product-button"
+          text="+Add Product"
+          style={$tapButton}
+          preset="reversed"
+          onPress={() => {}}
         />
       </Screen>
     )
@@ -84,79 +116,14 @@ const $root: ViewStyle = {
 }
 
 const $container: ViewStyle = {
+  flex: 1,
   // paddingTop: spacing.large + spacing.extraLarge,
   paddingBottom: spacing.huge,
   paddingHorizontal: spacing.large,
 }
 
-const $separator: ViewStyle = { height: 20 }
+const $tapButton: ViewStyle = {
+  marginTop: spacing.extraSmall,
+}
 
-const myProductDummyData = [
-  {
-    _id: "640309110c0c2272560ba69d",
-    merchantId: "640305783d8631bbf837888d",
-    productName: "mala..",
-    price: 500,
-    categoryId: "6402f9233cfa11d4130cdedb",
-    productDescription: "phol mala",
-    productQuantity: 100,
-    productImage: [],
-    status: 0,
-    is_deleted: "0",
-    createdAt: "2023-03-04T09:02:09.349Z",
-    updatedAt: "2023-03-04T10:46:08.613Z",
-    __v: 0,
-  },
-  {
-    _id: "64031ed8dc669fd3d0910099",
-    merchantId: "640305783d8631bbf837888d",
-    productName: "mala",
-    price: 500,
-    categoryId: "6402f9233cfa11d4130cdedb",
-    productDescription: "phol mala test",
-    productQuantity: 100,
-    productImage: [
-      {
-        fieldname: "productImage",
-        originalname: "pholMala.jpg",
-        encoding: "7bit",
-        mimetype: "image/jpeg",
-        destination: "F:\\pholwala_mongo\\pholwala_mongo\\public\\product_images",
-        filename: "1677926104068pholMala.jpg",
-        path: "F:\\pholwala_mongo\\pholwala_mongo\\public\\product_images\\1677926104068pholMala.jpg",
-        size: 38727,
-      },
-    ],
-    status: 0,
-    is_deleted: "0",
-    createdAt: "2023-03-04T10:35:04.085Z",
-    updatedAt: "2023-03-04T10:42:49.371Z",
-    __v: 0,
-  },
-  {
-    _id: "64031edfdc669fd3d091009b",
-    merchantId: "640305783d8631bbf837888d",
-    productName: "mala",
-    price: 500,
-    categoryId: "6402f9233cfa11d4130cdedb",
-    productDescription: "phol mala test 2",
-    productQuantity: 100,
-    productImage: [
-      {
-        fieldname: "productImage",
-        originalname: "pholMala.jpg",
-        encoding: "7bit",
-        mimetype: "image/jpeg",
-        destination: "F:\\pholwala_mongo\\pholwala_mongo\\public\\product_images",
-        filename: "1677926111044pholMala.jpg",
-        path: "F:\\pholwala_mongo\\pholwala_mongo\\public\\product_images\\1677926111044pholMala.jpg",
-        size: 38727,
-      },
-    ],
-    status: 0,
-    is_deleted: "0",
-    createdAt: "2023-03-04T10:35:11.047Z",
-    updatedAt: "2023-03-04T10:35:11.047Z",
-    __v: 0,
-  },
-]
+const $separator: ViewStyle = { height: 20 }
