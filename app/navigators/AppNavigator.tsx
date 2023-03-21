@@ -75,13 +75,13 @@ const AppStack = observer(function AppStack() {
           {/* @demo remove-block-start */}
           {user.role === "user" && (
             <Stack.Screen
-              name={ROUTES.User.App as keyof AppStackParamList}
+              name={ROUTES.User.UserApp as keyof AppStackParamList}
               component={UserNavigator}
             />
           )}
           {user.role === "admin" && (
             <Stack.Screen
-              name={ROUTES.Admin.App as keyof AppStackParamList}
+              name={ROUTES.Admin.AdminApp as keyof AppStackParamList}
               component={AdminNavigator}
             />
           )}

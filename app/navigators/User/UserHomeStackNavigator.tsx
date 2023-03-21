@@ -12,10 +12,10 @@ export const UserHomeStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{ cardStyle: { backgroundColor: "transparent" }, headerShown: false }}
-      initialRouteName={ROUTES.User.Home as keyof UserHomeStackNavigatorParamList}
+      initialRouteName={ROUTES.User.UserHome as keyof UserHomeStackNavigatorParamList}
     >
       <Stack.Screen
-        name={ROUTES.User.Home as keyof UserHomeStackNavigatorParamList}
+        name={ROUTES.User.UserHome as keyof UserHomeStackNavigatorParamList}
         component={UserHomeScreen}
       />
     </Stack.Navigator>

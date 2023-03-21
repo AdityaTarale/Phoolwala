@@ -13,19 +13,25 @@ export const ROUTES = {
 
   // User
   User: {
-    App: "UserApp",
-    HomeStack: "HomeStack",
-    Home: "Home",
+    UserApp: "UserApp",
+    UserHomeStack: "UserHomeStack",
+    UserHome: "UserHome",
   },
+
   // Merchant
   Merchant: {},
+
   // Delivery Boy
   DeliveryBoy: {},
+
   // Admin
   Admin: {
-    App: "AdminApp",
-    HomeStack: "HomeStack",
-    Home: "Home",
+    AdminApp: "AdminApp",
+    AdminHome: "AdminHome",
+    AdminProduct: "AdminProduct",
+    AdminOutlet: "AdminOutlet",
+    AdminEmployee: "AdminEmployee",
+    AdminOrder: "AdminOrder",
   },
 }
 

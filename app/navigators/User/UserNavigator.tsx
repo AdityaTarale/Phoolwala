@@ -22,7 +22,7 @@ import { UserHomeStackNavigator } from "./UserHomeStackNavigator"
 
 export type UserTabParamList = {
   DemoCommunity: undefined
-  HomeStack: { queryIndex?: string; itemIndex?: string }
+  UserHomeStack: { queryIndex?: string; itemIndex?: string }
   DemoDebug: undefined
   DemoPodcastList: undefined
 }
@@ -55,7 +55,7 @@ export function UserNavigator() {
       }}
     >
       <Tab.Screen
-        name={ROUTES.User.HomeStack as keyof UserTabParamList}
+        name={ROUTES.User.UserHomeStack as keyof UserTabParamList}
         // component={DemoShowroomScreen}
         component={UserHomeStackNavigator}
         options={{
