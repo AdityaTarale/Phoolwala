@@ -17,5 +17,5 @@ export * from "./UserScreen/UserHome"
 // Admin
 export * from "./AdminScreen/AdminHome"
 export * from "./AdminScreen/AdminProduct"
-export * from "./AdminScreen/AdminOutlet"
+export * from "./AdminScreen/AdminMerchant"
 export * from "./AdminScreen/AdminEmployee"

@@ -14,8 +14,12 @@ import Config from "../../config"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem" // @demo remove-current-line
 import type {
   ApiConfig,
+  GetMerchantsResponse,
   GetProductsResponse,
-  Product, // @demo remove-current-line
+  Merchant,
+  Product,
+  RegisteredMerchant,
+  RegisterMerchantsResponse, // @demo remove-current-line
 } from "./api.types"
 import { API_URL } from "../../utils/apiConfig"
 
@@ -65,6 +69,63 @@ export class AdminApi {
     try {
       const rawData = response.data.data
       return { kind: "ok", products: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getMerchants(): Promise<{ kind: "ok"; merchants: Array<Merchant> } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<GetMerchantsResponse> = await this.apisauce.post(
+      API_URL.getMerchants(),
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", merchants: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async registerMerchant(values: {
+    merchantName: string
+    email: string
+    mobileNo: string
+    password: string
+    city: string
+    state: string
+    address: string
+  }): Promise<{ kind: "ok"; merchantData: RegisteredMerchant } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<RegisterMerchantsResponse> = await this.apisauce.post(
+      API_URL.registerMerchant(),
+      values,
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", merchantData: rawData }
     } catch (e) {
       if (__DEV__) {
         console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)

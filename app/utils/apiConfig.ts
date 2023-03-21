@@ -7,6 +7,8 @@ export const API_URL = {
 
   // Admin
   getProducts: () => "/products/getProduct",
+  getMerchants: () => "/merchants/getMerchant",
+  registerMerchant: () => "/merchants/merchantRegister",
   // Merchant
 
   // Delivery boy

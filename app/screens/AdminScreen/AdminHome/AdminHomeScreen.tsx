@@ -100,9 +100,9 @@ const adminHomeScreenOptions = [
   },
   {
     id: 2,
-    name: "Outlet",
+    name: "Merchant",
     color: "#41BFFF",
-    screenTo: "AdminOutlet",
+    screenTo: "AdminMerchant",
   },
   {
     id: 3,

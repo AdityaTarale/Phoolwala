@@ -3,7 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack"
 import {
   AdminEmployeeScreen,
   AdminHomeScreen,
-  AdminOutletScreen,
+  AdminMerchantScreen,
+  AdminAddMerchantScreen,
   AdminProductScreen,
 } from "../../screens"
 import { ROUTES } from "../routes"
@@ -12,7 +13,8 @@ import { AdminOrderScreen } from "../../screens/AdminScreen/AdminOrder"
 export type AdminNavigatorParamList = {
   AdminHome: undefined
   AdminProduct: undefined
-  AdminOutlet: undefined
+  AdminMerchant: undefined
+  AdminAddMerchant: undefined
   AdminEmployee: undefined
   AdminOrder: undefined
 }
@@ -33,8 +35,12 @@ export const AdminNavigator = () => {
         component={AdminProductScreen}
       />
       <Stack.Screen
-        name={ROUTES.Admin.AdminOutlet as keyof AdminNavigatorParamList}
-        component={AdminOutletScreen}
+        name={ROUTES.Admin.AdminMerchant as keyof AdminNavigatorParamList}
+        component={AdminMerchantScreen}
+      />
+      <Stack.Screen
+        name={ROUTES.Admin.AdminAddMerchant as keyof AdminNavigatorParamList}
+        component={AdminAddMerchantScreen}
       />
       <Stack.Screen
         name={ROUTES.Admin.AdminEmployee as keyof AdminNavigatorParamList}
