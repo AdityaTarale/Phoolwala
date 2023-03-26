@@ -27,10 +27,12 @@ export const ROUTES = {
   // Admin
   Admin: {
     AdminApp: "AdminApp",
+    AdminHomeStack: "AdminHomeStack",
     AdminHome: "AdminHome",
-    AdminProduct: "AdminProduct",
+    AdminMerchantDetails: "AdminMerchantDetails",
     AdminMerchant: "AdminMerchant",
     AdminAddMerchant: "AdminAddMerchant",
+    AdminAddMerchantDetails: "AdminAddMerchantDetails",
     AdminEmployee: "AdminEmployee",
     AdminOrder: "AdminOrder",
   },

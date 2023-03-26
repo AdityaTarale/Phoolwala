@@ -4,7 +4,6 @@ import { ViewStyle, FlatList } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { Box, Screen, Text } from "../../../components"
 import { spacing } from "../../../theme"
-import { useHeader } from "../../../utils/useHeader"
 import OptionCard from "./OptionCard"
 import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigator"
 // import { useNavigation } from "@react-navigation/native"
@@ -21,10 +20,6 @@ import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigato
 // @ts-ignore
 export const AdminHomeScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminHome">> = observer(
   function AdminHomeScreen(__props) {
-    useHeader({
-      title: "",
-    })
-
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
@@ -94,9 +89,9 @@ const $columnWrapperStyle: ViewStyle = {
 const adminHomeScreenOptions = [
   {
     id: 1,
-    name: "Product",
+    name: "Settings",
     color: "#FF8F9C",
-    screenTo: "AdminProduct",
+    screenTo: "Settings",
   },
   {
     id: 2,

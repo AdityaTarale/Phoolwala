@@ -4,7 +4,6 @@ import {
   ViewStyle,
   FlatList,
   View,
-  ImageStyle,
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
@@ -13,7 +12,7 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { Box, Button, Screen, Text } from "../../../components"
 import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigator"
 import { useHeader } from "../../../utils/useHeader"
-import { spacing } from "../../../theme"
+import { colors, spacing } from "../../../theme"
 import { goBack } from "../../../navigators"
 import { apiAdmin } from "../../../services/admin-api"
 // import { useNavigation } from "@react-navigation/native"
@@ -31,7 +30,7 @@ import { apiAdmin } from "../../../services/admin-api"
 export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminMerchant">> =
   observer(function AdminMerchantScreen(__props) {
     useHeader({
-      title: "",
+      title: "Merchants",
       leftIcon: "back",
       onLeftPress: goBack,
     })
@@ -45,6 +44,10 @@ export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "
 
     const goToAddMerchantForm = () => {
       navigation.navigate("AdminAddMerchant")
+    }
+
+    const goToMerchantDetails = () => {
+      navigation.navigate("AdminMerchantDetails")
     }
 
     const [products, setProducts] = useState<any>()
@@ -64,7 +67,11 @@ export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "
 
     const renderItem = ({ item }) => {
       return (
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={$merchantContainer}
+          activeOpacity={0.6}
+          onPress={goToMerchantDetails}
+        >
           <Box flexDirection="row" alignItems="center" justifyContent="flex-start">
             <Box>
               <Text preset="subheading">{item?.merchantName}</Text>
@@ -116,6 +123,13 @@ const $container: ViewStyle = {
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.extraSmall,
+}
+
+const $merchantContainer: ViewStyle = {
+  backgroundColor: colors.palette.secondary100,
+  paddingHorizontal: 8,
+  paddingVertical: 4,
+  borderRadius: 8,
 }
 
 const $separator: ViewStyle = { height: 20 }

@@ -16,7 +16,7 @@ import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigato
 
 // REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
 // @ts-ignore
-export const AdminOrderScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminProduct">> =
+export const AdminOrderScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminOrder">> =
   observer(function AdminOrderScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()

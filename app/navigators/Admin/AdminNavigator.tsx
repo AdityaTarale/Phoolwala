@@ -2,19 +2,21 @@ import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import {
   AdminEmployeeScreen,
-  AdminHomeScreen,
   AdminMerchantScreen,
   AdminAddMerchantScreen,
-  AdminProductScreen,
+  AdminMerchantDetailsScreen,
 } from "../../screens"
 import { ROUTES } from "../routes"
 import { AdminOrderScreen } from "../../screens/AdminScreen/AdminOrder"
+import { AdminHomeStackNavigator } from "./AdminHomeStackNavigator"
+import { AdminAddMerchantProductScreen } from "../../screens/AdminScreen/AdminMerchantDetails/AdminAddMerchantProductScreen"
 
 export type AdminNavigatorParamList = {
-  AdminHome: undefined
-  AdminProduct: undefined
+  AdminHomeStack: undefined
   AdminMerchant: undefined
+  AdminMerchantDetails: undefined
   AdminAddMerchant: undefined
+  AdminAddMerchantDetails: undefined
   AdminEmployee: undefined
   AdminOrder: undefined
 }
@@ -24,15 +26,11 @@ export const AdminNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{ cardStyle: { backgroundColor: "transparent" }, headerShown: false }}
-      initialRouteName={ROUTES.Admin.AdminHome as keyof AdminNavigatorParamList}
+      initialRouteName={ROUTES.Admin.AdminHomeStack as keyof AdminNavigatorParamList}
     >
       <Stack.Screen
-        name={ROUTES.Admin.AdminHome as keyof AdminNavigatorParamList}
-        component={AdminHomeScreen}
-      />
-      <Stack.Screen
-        name={ROUTES.Admin.AdminProduct as keyof AdminNavigatorParamList}
-        component={AdminProductScreen}
+        name={ROUTES.Admin.AdminHomeStack as keyof AdminNavigatorParamList}
+        component={AdminHomeStackNavigator}
       />
       <Stack.Screen
         name={ROUTES.Admin.AdminMerchant as keyof AdminNavigatorParamList}
@@ -41,6 +39,14 @@ export const AdminNavigator = () => {
       <Stack.Screen
         name={ROUTES.Admin.AdminAddMerchant as keyof AdminNavigatorParamList}
         component={AdminAddMerchantScreen}
+      />
+      <Stack.Screen
+        name={ROUTES.Admin.AdminMerchantDetails as keyof AdminNavigatorParamList}
+        component={AdminMerchantDetailsScreen}
+      />
+      <Stack.Screen
+        name={ROUTES.Admin.AdminAddMerchantDetails as keyof AdminNavigatorParamList}
+        component={AdminAddMerchantProductScreen}
       />
       <Stack.Screen
         name={ROUTES.Admin.AdminEmployee as keyof AdminNavigatorParamList}
