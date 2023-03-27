@@ -1,3 +1,4 @@
 import { AdminMerchantDetailsScreen } from "./AdminMerchantDetailsScreen"
+import { AdminAddMerchantProductScreen } from "./AdminAddMerchantProductScreen"
 
-export { AdminMerchantDetailsScreen }
+export { AdminMerchantDetailsScreen, AdminAddMerchantProductScreen }

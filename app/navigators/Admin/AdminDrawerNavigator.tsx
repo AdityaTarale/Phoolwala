@@ -3,19 +3,18 @@ import React from "react"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { CustomDrawer } from "./CustomDrawer"
 import {
-  AdminDeliveryScreen,
-  AdminEmployeeScreen,
+  AdminCategoryScreen,
+  AdminUserScreen,
   AdminFaqScreen,
   AdminMerchantScreen,
 } from "../../screens"
 import { ROUTES } from "../routes"
 import { Icon } from "../../components"
 import { colors } from "../../theme"
-import { AdminOrderScreen } from "../../screens/AdminScreen/AdminOrder"
 
 const Drawer = createDrawerNavigator()
 
-export const AdminHomeStackNavigator = () => {
+export const AdminDrawerNavigator = () => {
   const arrayOfScreens = [
     {
       id: "0",
@@ -25,28 +24,21 @@ export const AdminHomeStackNavigator = () => {
       icon: <Icon icon="x" />,
     },
     {
-      id: "2",
-      stackName: ROUTES.Admin.AdminOrder,
-      screen: AdminOrderScreen,
-      label: "Order",
+      id: "1",
+      stackName: ROUTES.Admin.AdminCategory,
+      screen: AdminCategoryScreen,
+      label: "Category",
       icon: <Icon icon="x" />,
     },
     {
-      id: "3",
-      stackName: ROUTES.Admin.AdminEmployee,
-      screen: AdminEmployeeScreen,
+      id: "2",
+      stackName: ROUTES.Admin.AdminUser,
+      screen: AdminUserScreen,
       label: "Users",
       icon: <Icon icon="x" />,
     },
     {
-      id: "21",
-      stackName: ROUTES.Admin.AdminDelivery,
-      screen: AdminDeliveryScreen,
-      label: "Delivery",
-      icon: <Icon icon="x" />,
-    },
-    {
-      id: "1",
+      id: "3",
       stackName: ROUTES.Admin.AdminFAQ,
       screen: AdminFaqScreen,
       label: "FAQ",

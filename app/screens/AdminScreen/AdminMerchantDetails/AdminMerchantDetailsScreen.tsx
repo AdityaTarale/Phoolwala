@@ -12,10 +12,9 @@ import {
 } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AutoImage, Box, Button, Screen, Text } from "../../../components"
-import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigator"
 import { useHeader } from "../../../utils/useHeader"
 import { colors, spacing } from "../../../theme"
-import { goBack } from "../../../navigators"
+import { AdminMerchantStackNavigatorParamList, goBack } from "../../../navigators"
 import { apiAdmin } from "../../../services/admin-api"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
@@ -30,7 +29,7 @@ import { apiAdmin } from "../../../services/admin-api"
 // REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
 // @ts-ignore
 export const AdminMerchantDetailsScreen: FC<
-  StackScreenProps<AdminNavigatorParamList, "AdminMerchantDetails">
+  StackScreenProps<AdminMerchantStackNavigatorParamList, "AdminMerchantDetails">
 > = observer(function AdminMerchantDetailsScreen(__props) {
   useHeader({
     title: "",

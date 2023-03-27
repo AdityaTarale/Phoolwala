@@ -14,12 +14,16 @@ import Config from "../../config"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem" // @demo remove-current-line
 import type {
   ApiConfig,
+  Category,
+  GetCategoriesResponse,
   GetMerchantsResponse,
   GetProductsResponse,
+  GetUsersResponse,
   Merchant,
   Product,
   RegisteredMerchant,
-  RegisterMerchantsResponse, // @demo remove-current-line
+  RegisterMerchantsResponse,
+  User, // @demo remove-current-line
 } from "./api.types"
 import { API_URL } from "../../utils/apiConfig"
 
@@ -69,6 +73,52 @@ export class AdminApi {
     try {
       const rawData = response.data.data
       return { kind: "ok", products: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getUsers(): Promise<{ kind: "ok"; users: Array<User> } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<GetUsersResponse> = await this.apisauce.post(API_URL.getUsers())
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.user
+      return { kind: "ok", users: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getCategories(): Promise<{ kind: "ok"; categories: Array<Category> } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<GetCategoriesResponse> = await this.apisauce.post(
+      API_URL.getCategories(),
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", categories: rawData }
     } catch (e) {
       if (__DEV__) {
         console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)

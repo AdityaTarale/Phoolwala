@@ -47,6 +47,46 @@ export interface GetProductsResponse {
   data: Array<Product>
 }
 
+export interface User {
+  _id: string
+  fullName: string
+  email: string
+  mobileNo: number
+}
+
+export interface GetUsersResponse {
+  status: number
+  message: string
+  user: Array<User>
+}
+
+export interface Category {
+  _id: string
+  categoryName: string
+  categoryImage: [
+    {
+      fieldname: string
+      originalname: string
+      encoding: string
+      mimetype: string
+      destination: string
+      filename: string
+      path: string
+      size: number
+    },
+  ]
+  is_deleted: string
+  createdAt: string
+  updatedAt: string
+  __v: number
+}
+
+export interface GetCategoriesResponse {
+  status: number
+  message: string
+  data: Array<Category>
+}
+
 export interface Merchant {
   _id: string
   merchantName: string
