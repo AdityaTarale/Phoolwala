@@ -35,6 +35,9 @@ export const ROUTES = {
     AdminAddMerchantDetails: "AdminAddMerchantDetails",
     AdminEmployee: "AdminEmployee",
     AdminOrder: "AdminOrder",
+
+    AdminFAQ: "AdminFAQ",
+    AdminDelivery: "AdminDelivery",
   },
 }
 

@@ -47,8 +47,7 @@ export const AdminHomeScreen: FC<StackScreenProps<AdminNavigatorParamList, "Admi
         contentContainerStyle={$container}
       >
         <Box alignItems="center">
-          <Text preset="bold">Total Sales</Text>
-          <Text preset="heading">₹ 20,863.00</Text>
+          <Text preset="heading">Bloom.in</Text>
           {/* <AutoImage
             maxWidth={width - spacing.large - spacing.large}
             source={{
@@ -89,26 +88,26 @@ const $columnWrapperStyle: ViewStyle = {
 const adminHomeScreenOptions = [
   {
     id: 1,
-    name: "Settings",
-    color: "#FF8F9C",
-    screenTo: "Settings",
+    name: "Deliveries",
+    color: "#afafaf",
+    screenTo: "AdminDeliveries",
   },
   {
     id: 2,
     name: "Merchant",
-    color: "#41BFFF",
+    color: "#afafaf",
     screenTo: "AdminMerchant",
   },
   {
     id: 3,
-    name: "Employee",
-    color: "#56D1B7",
-    screenTo: "AdminEmployee",
+    name: "Users",
+    color: "#afafaf",
+    screenTo: "AdminUsers",
   },
   {
     id: 4,
     name: "Order",
-    color: "#FEC830",
+    color: "#afafaf",
     screenTo: "AdminOrder",
   },
 ]

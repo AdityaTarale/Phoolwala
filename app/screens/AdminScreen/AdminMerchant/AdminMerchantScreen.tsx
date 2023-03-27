@@ -29,11 +29,6 @@ import { apiAdmin } from "../../../services/admin-api"
 // @ts-ignore
 export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminMerchant">> =
   observer(function AdminMerchantScreen(__props) {
-    useHeader({
-      title: "Merchants",
-      leftIcon: "back",
-      onLeftPress: goBack,
-    })
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
@@ -86,6 +81,9 @@ export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "
     return (
       <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
         <Box flex={1}>
+          <Box marginVertical={12}>
+            <Text preset="subheading">Merchants</Text>
+          </Box>
           <ScrollView>
             <FlatList
               ListEmptyComponent={

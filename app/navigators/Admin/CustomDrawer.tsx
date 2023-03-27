@@ -2,11 +2,15 @@ import React from "react"
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer"
 import { Box, Text } from "../../components"
 import { colors } from "../../theme"
+import { useStores } from "../../models"
 // import { ShareIcon, LogoutIcon } from "@icons"
 // import { Text, Avatar } from "@shared"
 // import { AvatarImage } from "@images"
 
 export const CustomDrawer = (props) => {
+  const {
+    authenticationStore: { logout },
+  } = useStores()
   return (
     <Box flex={1}>
       <DrawerContentScrollView {...props} style={{ flex: 1, height: 500, backgroundColor: "#fff" }}>
@@ -51,7 +55,7 @@ export const CustomDrawer = (props) => {
 
         <DrawerItem
           label="Logout"
-          onPress={() => {}}
+          onPress={() => logout()}
           labelStyle={{
             color: colors.text,
             //     marginLeft: -16,

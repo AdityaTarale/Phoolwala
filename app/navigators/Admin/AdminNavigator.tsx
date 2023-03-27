@@ -19,6 +19,8 @@ export type AdminNavigatorParamList = {
   AdminAddMerchantDetails: undefined
   AdminEmployee: undefined
   AdminOrder: undefined
+  AdminFAQ: undefined
+  AdminDelivery: undefined
 }
 
 const Stack = createStackNavigator<AdminNavigatorParamList>()
