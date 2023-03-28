@@ -11,11 +11,11 @@ import {
   TextStyle,
 } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { AutoImage, Box, Button, Screen, Text } from "../../../components"
-import { useHeader } from "../../../utils/useHeader"
-import { colors, spacing } from "../../../theme"
-import { AdminMerchantStackNavigatorParamList, goBack } from "../../../navigators"
-import { apiAdmin, Merchant, Product } from "../../../services/admin-api"
+import { AutoImage, Box, Button, Screen, Text } from "../../components"
+import { useHeader } from "../../utils/useHeader"
+import { colors, spacing } from "../../theme"
+import { AdminMerchantStackNavigatorParamList, goBack } from "../../navigators"
+import { apiAdmin, Merchant, Product } from "../../services/admin-api"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 

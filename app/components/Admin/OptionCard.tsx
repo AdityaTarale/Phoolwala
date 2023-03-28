@@ -1,6 +1,6 @@
 import React from "react"
 import { Dimensions, TextStyle, TouchableOpacity, ViewStyle } from "react-native"
-import { Text } from "../../../components"
+import { Text } from ".."
 
 type OptionCardProps = {
   onPress?: () => void
@@ -17,12 +17,6 @@ const OptionCard: React.FC<OptionCardProps> = ({ onPress, option }) => {
       activeOpacity={0.7}
       onPress={onPress}
     >
-      {/* <AutoImage
-        source={{
-          uri: imageUrl,
-        }}
-        style={styles.option}
-      /> */}
       <Text preset="bold" style={$optionText}>
         {option.name}
       </Text>
@@ -42,11 +36,6 @@ const $normalCardContainer: ViewStyle = {
   overflow: "hidden",
   width: width / 2 - 4,
 }
-
-// const  $option:ImageStyle = {
-//     maxHeight: 175,
-//     maxWidth: width / 2 - 4,
-//   },
 
 const $optionText: TextStyle = {
   color: "white",

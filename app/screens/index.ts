@@ -12,13 +12,16 @@ export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here
 
 // User
-export * from "./UserScreen/UserHome"
+export * from "./UserScreen/UserHomeScreen"
 
 // Admin
-export * from "./AdminScreen/AdminHome"
-export * from "./AdminScreen/AdminMerchantDetails"
-export * from "./AdminScreen/AdminMerchant"
-export * from "./AdminScreen/AdminFaq/AdminFaqScreen"
+export * from "./AdminScreen/AdminHomeScreen"
+export * from "./AdminScreen/AdminMerchantDetailsScreen"
+export * from "./AdminScreen/AdminMerchantDetailsScreen"
+export * from "./AdminScreen/AdminFaqScreen"
 export * from "./AdminManageUsersScreen"
-export * from "./AdminScreen/AdminCategory"
-export * from "./AdminScreen/AdminUser"
+export * from "./AdminScreen/AdminCategoryScreen"
+export * from "./AdminScreen/AdminUserScreen"
+export * from "./AdminScreen/AdminMerchantScreen"
+export * from "./AdminScreen/AdminAddMerchantScreen"
+export * from "./AdminScreen/AdminAddMerchantProductScreen"

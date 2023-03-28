@@ -8,8 +8,8 @@ import {
   ImageStyle,
 } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "../../../theme"
-import { Text, Box } from "../../../components"
+import { colors, spacing, typography } from "../../theme"
+import { Text, Box } from ".."
 
 function CategoryBox({ title, imageUrl }) {
   return (

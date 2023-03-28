@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
-import { Box, Icon, TextField, TextFieldAccessoryProps } from "../../../components"
-import { colors } from "../../../theme"
+import { Box, Icon, TextField, TextFieldAccessoryProps } from ".."
+import { colors } from "../../theme"
 
 export function SearchBar() {
   const PasswordLeftAccessory = useMemo(

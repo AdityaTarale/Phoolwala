@@ -1,46 +1,61 @@
-import { StackScreenProps } from "@react-navigation/stack"
-import { observer } from "mobx-react-lite"
 import React, { FC, useEffect, useState } from "react"
+import { observer } from "mobx-react-lite"
 import {
-  ActivityIndicator,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-  View,
   ViewStyle,
+  FlatList,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
 } from "react-native"
-import { Box, Screen, Text } from "../../../components"
-import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigator"
-import { apiAdmin } from "../../../services/admin-api"
-import { colors, spacing } from "../../../theme"
+import { StackScreenProps } from "@react-navigation/stack"
+import { Box, Button, Screen, Text } from "../../components"
+import { AdminNavigatorParamList } from "../../navigators/Admin/AdminNavigator"
+import { colors, spacing } from "../../theme"
+import { apiAdmin } from "../../services/admin-api"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
 // STOP! READ ME FIRST!
 // To fix the TS error below, you'll need to add the following things in your navigation config:
-// - Add `AdminProduct: undefined` to AppStackParamList
+// - Add `AdminMerchant: undefined` to AppStackParamList
 // - Import your screen, and add it to the stack:
-//     `<Stack.Screen name="AdminProduct" component={AdminUserScreen} />`
+//     `<Stack.Screen name="AdminMerchant" component={AdminMerchantScreen} />`
 // Hint: Look for the 🔥!
 
 // REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
 // @ts-ignore
-export const AdminUserScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminUser">> = observer(
-  function AdminUserScreen(__props) {
+export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "AdminMerchant">> =
+  observer(function AdminMerchantScreen(__props) {
+    // Pull in one of our MST stores
+    // const { someStore, anotherStore } = useStores()
+
+    // Pull in navigation via hook
+    // const navigation = useNavigation()
+
     const { navigation } = __props
 
-    const goToMerchantDetails = () => {
-      // navigation.navigate("AdminUserDetails")
+    const goToAddMerchantForm = () => {
+      navigation.navigate("AdminMerchantStack", {
+        screen: "AdminAddMerchant",
+      })
     }
 
-    const [users, setUsers] = useState<any>()
+    const goToMerchantDetails = (merchantId: string) => {
+      navigation.navigate("AdminMerchantStack", {
+        screen: "AdminMerchantDetails",
+        params: { merchantId: merchantId },
+      })
+    }
+
+    const [products, setProducts] = useState<any>()
 
     useEffect(() => {
       ;(async () => {
         try {
-          const response = await apiAdmin.getUsers()
+          const response = await apiAdmin.getMerchants()
           if (response.kind === "ok") {
-            setUsers(response.users)
+            setProducts(response.merchants)
           }
         } catch (error) {
           console.log(error)
@@ -53,12 +68,12 @@ export const AdminUserScreen: FC<StackScreenProps<AdminNavigatorParamList, "Admi
         <TouchableOpacity
           style={$merchantContainer}
           activeOpacity={0.6}
-          onPress={goToMerchantDetails}
+          onPress={() => goToMerchantDetails(item._id)}
         >
           <Box flexDirection="row" alignItems="center" justifyContent="flex-start">
             <Box>
-              <Text preset="subheading">{item?.fullName}</Text>
-              <Text preset="default">{item?.email}</Text>
+              <Text preset="subheading">{item?.merchantName}</Text>
+              <Text preset="default">{item?.address}</Text>
               <Text>{item?.city}</Text>
             </Box>
           </Box>
@@ -70,7 +85,7 @@ export const AdminUserScreen: FC<StackScreenProps<AdminNavigatorParamList, "Admi
       <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
         <Box flex={1}>
           <Box marginVertical={12}>
-            <Text preset="subheading">Users</Text>
+            <Text preset="subheading">Merchants</Text>
           </Box>
           <ScrollView>
             <FlatList
@@ -79,16 +94,22 @@ export const AdminUserScreen: FC<StackScreenProps<AdminNavigatorParamList, "Admi
                   <ActivityIndicator />
                 </Box>
               }
-              data={users}
+              data={products}
               renderItem={renderItem}
               ItemSeparatorComponent={() => <View style={$separator} />}
             />
           </ScrollView>
         </Box>
+        <Button
+          testID="add-product-button"
+          text="+Add Merchant"
+          style={$tapButton}
+          preset="reversed"
+          onPress={goToAddMerchantForm}
+        />
       </Screen>
     )
-  },
-)
+  })
 
 const $root: ViewStyle = {
   flex: 1,
@@ -101,9 +122,9 @@ const $container: ViewStyle = {
   paddingHorizontal: spacing.large,
 }
 
-// const $tapButton: ViewStyle = {
-//   marginTop: spacing.extraSmall,
-// }
+const $tapButton: ViewStyle = {
+  marginTop: spacing.extraSmall,
+}
 
 const $merchantContainer: ViewStyle = {
   backgroundColor: colors.palette.secondary100,
