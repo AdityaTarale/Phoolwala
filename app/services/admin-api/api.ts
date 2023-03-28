@@ -183,6 +183,65 @@ export class AdminApi {
       return { kind: "bad-data" }
     }
   }
+
+  async getMerchantById(
+    merchantId: string,
+  ): Promise<{ kind: "ok"; merchant: Merchant } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<GetMerchantsResponse> = await this.apisauce.post(
+      API_URL.getMerchantById(),
+      {
+        merchantId,
+      },
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", merchant: rawData[0] }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getProductByMerchantId(
+    merchantId: string,
+  ): Promise<{ kind: "ok"; products: Array<Product> } | GeneralApiProblem> {
+    // make the api call
+
+    const response: ApiResponse<GetProductsResponse> = await this.apisauce.post(
+      API_URL.getProductByMerchantId(),
+      {
+        merchantId,
+      },
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", products: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
 }
 
 // Singleton instance of the API for convenience

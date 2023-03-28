@@ -3,10 +3,9 @@ import { observer } from "mobx-react-lite"
 import { ViewStyle, TextInput, TextStyle, ActivityIndicator } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { Button, Screen, Text, TextField, Icon, TextFieldAccessoryProps } from "../../../components"
-import { AdminNavigatorParamList } from "../../../navigators/Admin/AdminNavigator"
 import { useHeader } from "../../../utils/useHeader"
 import { colors, spacing } from "../../../theme"
-import { goBack } from "../../../navigators"
+import { AdminMerchantStackNavigatorParamList, goBack } from "../../../navigators"
 import { useStores } from "../../../models"
 import { ScrollView } from "react-native-gesture-handler"
 import { apiAdmin } from "../../../services/admin-api"
@@ -24,7 +23,7 @@ import { apiAdmin } from "../../../services/admin-api"
 // REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
 // @ts-ignore
 export const AdminAddMerchantProductScreen: FC<
-  StackScreenProps<AdminNavigatorParamList, "AdminAddMerchant">
+  StackScreenProps<AdminMerchantStackNavigatorParamList, "AdminAddMerchant">
 > = observer(function AdminAddMerchantProductScreen(__props) {
   useHeader({
     title: "",
@@ -39,29 +38,21 @@ export const AdminAddMerchantProductScreen: FC<
 
   const { navigation } = __props
 
-  const emailInput = useRef<TextInput>()
-  const mobileNoInput = useRef<TextInput>()
-  const passwordInput = useRef<TextInput>()
-  const cityInput = useRef<TextInput>()
-  const stateInput = useRef<TextInput>()
-  const addressInput = useRef<TextInput>()
+  const priceInput = useRef<TextInput>()
+  const categoryIdInput = useRef<TextInput>()
+  const productDescriptionInput = useRef<TextInput>()
+  const productQuantityInput = useRef<TextInput>()
 
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [merchantName, setMerchantName] = useState("")
-  const [email, setEmail] = useState("")
-  const [mobileNo, setMobileNo] = useState("")
-  const [password, setPassword] = useState("")
-  const [city, setCity] = useState("")
-  const [state, setState] = useState("")
-  const [address, setAddress] = useState("")
-
-  const {
-    authenticationStore: { mobileNoValidationError },
-  } = useStores()
+  const [productName, setProductName] = useState("")
+  const [price, setPrice] = useState("")
+  const [categoryId, setCategoryId] = useState("")
+  const [productDescription, setProductDescription] = useState("")
+  const [productQuantity, setProductQuantity] = useState("")
 
   // const error = isSubmitted ? mobileNoValidationError : ""
   const error = ""
@@ -76,19 +67,19 @@ export const AdminAddMerchantProductScreen: FC<
     // If successful, reset the fields and set the token.
     try {
       setIsLoading(true)
-      const response = await apiAdmin.registerMerchant({
-        merchantName,
-        email,
-        mobileNo,
-        password,
-        city,
-        state,
-        address,
-      })
+      // const response = await apiAdmin.registerMerchant({
+      //   productName,
+      //   price,
+      //   categoryId,
+      //   productDescription,
+      //   productQuantity,
+      //   state,
+      //   address,
+      // })
       setIsLoading(false)
-      if (response.kind === "ok") {
-        goBack()
-      }
+      // if (response.kind === "ok") {
+      //   goBack()
+      // }
     } catch (error) {
       setIsLoading(false)
     }
@@ -101,22 +92,6 @@ export const AdminAddMerchantProductScreen: FC<
     // setAuthToken(String(Date.now()))
   }
 
-  const PasswordRightAccessory = useMemo(
-    () =>
-      function PasswordRightAccessory(props: TextFieldAccessoryProps) {
-        return (
-          <Icon
-            icon={isAuthPasswordHidden ? "view" : "hidden"}
-            color={colors.palette.neutral800}
-            containerStyle={props.style}
-            size={20}
-            onPress={() => setIsAuthPasswordHidden(!isAuthPasswordHidden)}
-          />
-        )
-      },
-    [isAuthPasswordHidden],
-  )
-
   return (
     <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
       {isLoading && <ActivityIndicator />}
@@ -128,102 +103,75 @@ export const AdminAddMerchantProductScreen: FC<
       />
       <ScrollView>
         <TextField
-          value={merchantName}
-          onChangeText={setMerchantName}
+          value={productName}
+          onChangeText={setProductName}
           containerStyle={$textField}
           autoCapitalize="none"
           autoComplete="off"
           autoCorrect={false}
-          label="Merchant Name"
-          placeholder="Enter full name"
+          label="Product Name"
+          placeholder="Enter product name"
           helper={error}
           status={error ? "error" : undefined}
-          onSubmitEditing={() => emailInput.current?.focus()}
+          onSubmitEditing={() => priceInput.current?.focus()}
         />
 
         <TextField
-          value={email}
-          onChangeText={setEmail}
+          value={price}
+          onChangeText={setPrice}
           containerStyle={$textField}
           autoCapitalize="none"
-          autoComplete="email"
           autoCorrect={false}
-          keyboardType="email-address"
-          labelTx="registerScreen.emailFieldLabel"
-          placeholder="Enter email address"
+          keyboardType="number-pad"
+          label="Price"
+          placeholder="Enter price"
           helper={error}
           status={error ? "error" : undefined}
-          onSubmitEditing={() => mobileNoInput.current?.focus()}
+          onSubmitEditing={() => categoryIdInput.current?.focus()}
         />
 
         <TextField
-          value={mobileNo}
-          onChangeText={setMobileNo}
+          value={categoryId}
+          onChangeText={setCategoryId}
           containerStyle={$textField}
           autoCapitalize="none"
           autoComplete="off"
           autoCorrect={false}
           keyboardType="number-pad"
-          labelTx="registerScreen.mobileNoFieldLabel"
-          placeholder="Enter mobile number"
+          label="Select Category"
+          placeholder="Enter category"
           helper={error}
           status={error ? "error" : undefined}
-          onSubmitEditing={() => passwordInput.current?.focus()}
+          onSubmitEditing={() => productDescriptionInput.current?.focus()}
         />
 
         <TextField
-          ref={passwordInput}
-          value={password}
-          onChangeText={setPassword}
+          ref={productDescriptionInput}
+          value={productDescription}
+          onChangeText={setProductDescription}
           containerStyle={$textField}
           autoCapitalize="none"
-          autoComplete="password"
           autoCorrect={false}
           secureTextEntry={isAuthPasswordHidden}
-          labelTx="registerScreen.passwordFieldLabel"
-          placeholderTx="registerScreen.passwordFieldPlaceholder"
-          onSubmitEditing={() => cityInput.current?.focus()}
-          RightAccessory={PasswordRightAccessory}
+          label="Product Description"
+          placeholder="Enter product description"
+          onSubmitEditing={() => productQuantityInput.current?.focus()}
         />
 
         <TextField
-          value={city}
-          onChangeText={setCity}
+          value={productQuantity}
+          onChangeText={setProductQuantity}
           containerStyle={$textField}
           autoCapitalize="none"
           autoComplete="off"
           autoCorrect={false}
-          label="City"
-          placeholder="Enter city name"
-          onSubmitEditing={() => stateInput.current?.focus()}
-        />
-
-        <TextField
-          value={state}
-          onChangeText={setState}
-          containerStyle={$textField}
-          autoCapitalize="none"
-          autoComplete="off"
-          autoCorrect={false}
-          label="State"
-          placeholder="Enter state name"
-          onSubmitEditing={() => addressInput.current?.focus()}
-        />
-
-        <TextField
-          value={address}
-          onChangeText={setAddress}
-          containerStyle={$textField}
-          autoCapitalize="none"
-          autoComplete="off"
-          autoCorrect={false}
-          label="Address"
-          placeholder="Enter full address"
+          label="Product Quantity"
+          placeholder="Enter product quantity"
           onSubmitEditing={handleRegister}
         />
 
         <Button
-          testID="register-merchant-button"
+          testID="add-merchants-product-button"
           text="Submit"
           style={$tapButton}
           preset="reversed"

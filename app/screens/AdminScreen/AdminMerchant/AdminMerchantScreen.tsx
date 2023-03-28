@@ -36,12 +36,16 @@ export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "
     const { navigation } = __props
 
     const goToAddMerchantForm = () => {
-      // navigation.navigate("AdminAddMerchant")
+      navigation.navigate("AdminMerchantStack", {
+        screen: "AdminAddMerchant",
+      })
     }
 
     const goToMerchantDetails = (merchantId: string) => {
-      console.log(merchantId)
-      navigation.navigate("AdminMerchantStack", { merchantId: merchantId })
+      navigation.navigate("AdminMerchantStack", {
+        screen: "AdminMerchantDetails",
+        params: { merchantId: merchantId },
+      })
     }
 
     const [products, setProducts] = useState<any>()

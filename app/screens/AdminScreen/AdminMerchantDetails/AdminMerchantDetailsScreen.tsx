@@ -15,7 +15,7 @@ import { AutoImage, Box, Button, Screen, Text } from "../../../components"
 import { useHeader } from "../../../utils/useHeader"
 import { colors, spacing } from "../../../theme"
 import { AdminMerchantStackNavigatorParamList, goBack } from "../../../navigators"
-import { apiAdmin } from "../../../services/admin-api"
+import { apiAdmin, Merchant, Product } from "../../../services/admin-api"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -42,29 +42,43 @@ export const AdminMerchantDetailsScreen: FC<
   // Pull in navigation via hook
   // const navigation = useNavigation()
 
-  const { navigation } = __props
+  const { navigation, route } = __props
 
-  const [products, setProducts] = useState<any>()
+  const [isLoading, setIsLoading] = useState(false)
+  const [products, setProducts] = useState<Array<Product>>([])
+  const [merchantDetails, setMerchantDetails] = useState<Merchant>()
 
   useEffect(() => {
     ;(async () => {
       try {
-        const response = await apiAdmin.getProducts()
+        const response = await apiAdmin.getMerchantById(route?.params?.merchantId)
         if (response.kind === "ok") {
-          setProducts(response.products)
+          setMerchantDetails(response.merchant)
         }
       } catch (error) {
         console.log(error)
       }
     })()
-  }, [])
+  }, [route?.params?.merchantId])
+
+  useEffect(() => {
+    ;(async () => {
+      setIsLoading(true)
+      try {
+        const response = await apiAdmin.getProductByMerchantId(route?.params?.merchantId)
+        if (response.kind === "ok") {
+          setIsLoading(false)
+          setProducts(response.products)
+        }
+      } catch (error) {
+        setIsLoading(false)
+        console.log(error)
+      }
+    })()
+  }, [route?.params?.merchantId])
 
   const goToAddMerchantProductForm = () => {
     navigation.navigate("AdminAddMerchantDetails")
-  }
-
-  const goToMerchantDetails = () => {
-    navigation.navigate("AdminMerchantDetails")
   }
 
   const renderItem = ({ item }) => {
@@ -93,23 +107,29 @@ export const AdminMerchantDetailsScreen: FC<
     <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
       <Box flex={1}>
         <Box
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="flex-start"
           padding={8}
           borderRadius={8}
           marginBottom={16}
           backgroundColor={colors.palette.secondary500}
         >
           <Text preset="subheading" style={$heading}>
-            Aditya Merchant
+            {merchantDetails?.merchantName}
+          </Text>
+          <Text preset="bold" style={$heading}>
+            {merchantDetails?.mobileNo}
+          </Text>
+
+          <Text preset="default" style={$heading}>
+            Address:
+            {merchantDetails?.address}
+            {merchantDetails?.city} {merchantDetails?.state}
           </Text>
         </Box>
         <ScrollView>
           <FlatList
             ListEmptyComponent={
               <Box width="100%" alignItems="center" justifyContent="center">
-                <ActivityIndicator />
+                {isLoading ? <ActivityIndicator /> : <Text>No data found</Text>}
               </Box>
             }
             data={products}

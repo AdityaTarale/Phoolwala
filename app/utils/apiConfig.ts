@@ -8,6 +8,8 @@ export const API_URL = {
   // Admin
   getProducts: () => "/products/getProduct",
   getMerchants: () => "/merchants/getMerchant",
+  getMerchantById: () => "/merchants/getMerchantById",
+  getProductByMerchantId: () => "/products/getProductByMerchant",
   registerMerchant: () => "/merchants/merchantRegister",
   getUsers: () => "/users/getUser",
   getCategories: () => "/categorys/getCategory",
