@@ -13,6 +13,7 @@ export const API_URL = {
   registerMerchant: () => "/merchants/merchantRegister",
   getUsers: () => "/users/getUser",
   getCategories: () => "/categorys/getCategory",
+  addProduct: () => "/products/addProduct",
   // Merchant
 
   // Delivery boy

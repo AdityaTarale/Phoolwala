@@ -13,7 +13,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 //  <Icon icon="components" color={focused && colors.tint} size={30} />
 import Icon from "react-native-vector-icons/Feather"
 import { translate } from "../../i18n"
-import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen } from "../../screens"
+import {
+  DemoCommunityScreen,
+  DemoShowroomScreen,
+  DemoDebugScreen,
+  WelcomeScreen,
+} from "../../screens"
 import { DemoPodcastListScreen } from "../../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../../theme"
 import { AppStackParamList, AppStackScreenProps } from "../AppNavigator"
@@ -68,7 +73,8 @@ export function UserNavigator() {
 
       <Tab.Screen
         name={ROUTES.DemoCommunity as keyof UserTabParamList}
-        component={DemoCommunityScreen}
+        // component={DemoCommunityScreen}
+        component={WelcomeScreen}
         options={{
           tabBarLabel: translate("userNavigator.categoryTab"),
           tabBarIcon: ({ focused, color }) => (
@@ -79,7 +85,8 @@ export function UserNavigator() {
 
       <Tab.Screen
         name={ROUTES.DemoPodcastList as keyof UserTabParamList}
-        component={DemoPodcastListScreen}
+        // component={DemoPodcastListScreen}
+        component={WelcomeScreen}
         options={{
           tabBarLabel: translate("userNavigator.cartTab"),
           tabBarIcon: ({ focused, color }) => (
@@ -90,7 +97,8 @@ export function UserNavigator() {
 
       <Tab.Screen
         name={ROUTES.DemoDebug as keyof UserTabParamList}
-        component={DemoDebugScreen}
+        // component={DemoDebugScreen}
+        component={WelcomeScreen}
         options={{
           tabBarLabel: translate("userNavigator.profileTab"),
           tabBarIcon: ({ focused, color }) => (

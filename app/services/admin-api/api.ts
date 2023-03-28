@@ -13,6 +13,7 @@ import {
 import Config from "../../config"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem" // @demo remove-current-line
 import type {
+  AddProductResponse,
   ApiConfig,
   Category,
   GetCategoriesResponse,
@@ -235,6 +236,38 @@ export class AdminApi {
     try {
       const rawData = response.data.data
       return { kind: "ok", products: rawData }
+    } catch (e) {
+      if (__DEV__) {
+        console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  async addProduct(values: {
+    productName: string
+    price: string
+    categoryId: string
+    productDescription: string
+    productQuantity: string
+    merchantId: string
+  }): Promise<{ kind: "ok"; product: Product } | GeneralApiProblem> {
+    // make the api call
+    const response: ApiResponse<AddProductResponse> = await this.apisauce.post(
+      API_URL.addProduct(),
+      values,
+    )
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const rawData = response.data.data
+      return { kind: "ok", product: rawData }
     } catch (e) {
       if (__DEV__) {
         console.tron.error(`Bad data: ${e.message}\n${response.data}`, e.stack)

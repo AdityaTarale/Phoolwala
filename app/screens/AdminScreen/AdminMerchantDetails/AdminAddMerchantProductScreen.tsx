@@ -1,12 +1,11 @@
-import React, { FC, useState, useRef, useMemo } from "react"
+import React, { FC, useState, useRef } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, TextInput, TextStyle, ActivityIndicator } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { Button, Screen, Text, TextField, Icon, TextFieldAccessoryProps } from "../../../components"
+import { Button, Screen, Text, TextField } from "../../../components"
 import { useHeader } from "../../../utils/useHeader"
-import { colors, spacing } from "../../../theme"
+import { spacing } from "../../../theme"
 import { AdminMerchantStackNavigatorParamList, goBack } from "../../../navigators"
-import { useStores } from "../../../models"
 import { ScrollView } from "react-native-gesture-handler"
 import { apiAdmin } from "../../../services/admin-api"
 
@@ -23,7 +22,7 @@ import { apiAdmin } from "../../../services/admin-api"
 // REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
 // @ts-ignore
 export const AdminAddMerchantProductScreen: FC<
-  StackScreenProps<AdminMerchantStackNavigatorParamList, "AdminAddMerchant">
+  StackScreenProps<AdminMerchantStackNavigatorParamList, "AdminAddMerchantDetails">
 > = observer(function AdminAddMerchantProductScreen(__props) {
   useHeader({
     title: "",
@@ -36,7 +35,7 @@ export const AdminAddMerchantProductScreen: FC<
   // Pull in navigation via hook
   // const navigation = useNavigation()
 
-  const { navigation } = __props
+  const { navigation, route } = __props
 
   const priceInput = useRef<TextInput>()
   const categoryIdInput = useRef<TextInput>()
@@ -50,9 +49,10 @@ export const AdminAddMerchantProductScreen: FC<
   const [isLoading, setIsLoading] = useState(false)
   const [productName, setProductName] = useState("")
   const [price, setPrice] = useState("")
-  const [categoryId, setCategoryId] = useState("")
+  const [categoryId, setCategoryId] = useState("6402f9233cfa11d4130cdedb")
   const [productDescription, setProductDescription] = useState("")
   const [productQuantity, setProductQuantity] = useState("")
+  const [merchantId, setMerchantId] = useState(route?.params?.merchantId)
 
   // const error = isSubmitted ? mobileNoValidationError : ""
   const error = ""
@@ -67,19 +67,18 @@ export const AdminAddMerchantProductScreen: FC<
     // If successful, reset the fields and set the token.
     try {
       setIsLoading(true)
-      // const response = await apiAdmin.registerMerchant({
-      //   productName,
-      //   price,
-      //   categoryId,
-      //   productDescription,
-      //   productQuantity,
-      //   state,
-      //   address,
-      // })
+      const response = await apiAdmin.addProduct({
+        productName,
+        price,
+        categoryId,
+        productDescription,
+        productQuantity,
+        merchantId,
+      })
       setIsLoading(false)
-      // if (response.kind === "ok") {
-      //   goBack()
-      // }
+      if (response.kind === "ok") {
+        goBack()
+      }
     } catch (error) {
       setIsLoading(false)
     }
@@ -152,7 +151,6 @@ export const AdminAddMerchantProductScreen: FC<
           containerStyle={$textField}
           autoCapitalize="none"
           autoCorrect={false}
-          secureTextEntry={isAuthPasswordHidden}
           label="Product Description"
           placeholder="Enter product description"
           onSubmitEditing={() => productQuantityInput.current?.focus()}

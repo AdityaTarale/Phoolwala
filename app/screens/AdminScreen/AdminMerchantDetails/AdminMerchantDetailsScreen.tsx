@@ -78,7 +78,7 @@ export const AdminMerchantDetailsScreen: FC<
   }, [route?.params?.merchantId])
 
   const goToAddMerchantProductForm = () => {
-    navigation.navigate("AdminAddMerchantDetails")
+    navigation.navigate("AdminAddMerchantDetails", { merchantId: route?.params?.merchantId })
   }
 
   const renderItem = ({ item }) => {

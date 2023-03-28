@@ -135,3 +135,10 @@ export interface RegisterMerchantsResponse {
   message: string
   data: RegisteredMerchant
 }
+
+export interface AddProductResponse {
+  code: number
+  status: number
+  message: string
+  data: Product
+}

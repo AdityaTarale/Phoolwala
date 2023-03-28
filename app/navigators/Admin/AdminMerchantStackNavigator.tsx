@@ -10,7 +10,7 @@ import {
 } from "../../screens"
 
 export type AdminMerchantStackNavigatorParamList = {
-  AdminAddMerchant: undefined
+  AdminAddMerchant: { merchantId: string }
   AdminMerchantDetails: { merchantId: string }
   AdminAddMerchantDetails: { merchantId: string }
 }

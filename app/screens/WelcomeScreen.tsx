@@ -40,7 +40,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
 
   return (
     <View style={$container}>
-      <View style={$topContainer}>
+      {/* <View style={$topContainer}>
         <Image style={$welcomeLogo} source={welcomeLogo} resizeMode="contain" />
         <Text
           testID="welcome-heading"
@@ -54,15 +54,15 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
 
       <View style={[$bottomContainer, $bottomContainerInsets]}>
         <Text tx="welcomeScreen.postscript" size="md" />
-        {/* @demo remove-block-start */}
+        {/* @demo remove-block-start 
         <Button
           testID="next-screen-button"
           preset="reversed"
           tx="welcomeScreen.letsGo"
           onPress={goNext}
         />
-        {/* @demo remove-block-end */}
-      </View>
+      @demo remove-block-end 
+      </View>  */}
     </View>
   )
 })
