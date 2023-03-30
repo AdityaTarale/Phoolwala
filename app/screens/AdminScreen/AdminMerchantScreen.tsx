@@ -44,7 +44,7 @@ export const AdminMerchantScreen: FC<StackScreenProps<AdminNavigatorParamList, "
     const goToMerchantDetails = (merchantId: string) => {
       navigation.navigate("AdminMerchantStack", {
         screen: "AdminMerchantDetails",
-        params: { merchantId: merchantId },
+        params: { merchantId },
       })
     }
 

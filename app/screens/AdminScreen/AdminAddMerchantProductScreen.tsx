@@ -1,8 +1,8 @@
-import React, { FC, useState, useRef } from "react"
+import React, { FC, useState, useRef, useEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, TextInput, TextStyle, ActivityIndicator } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { Button, Screen, Text, TextField } from "../../components"
+import { Button, CustomDropdown, Screen, Text, TextField } from "../../components"
 import { useHeader } from "../../utils/useHeader"
 import { spacing } from "../../theme"
 import { AdminMerchantStackNavigatorParamList, goBack } from "../../navigators"
@@ -49,15 +49,16 @@ export const AdminAddMerchantProductScreen: FC<
   const [isLoading, setIsLoading] = useState(false)
   const [productName, setProductName] = useState("")
   const [price, setPrice] = useState("")
-  const [categoryId, setCategoryId] = useState("6402f9233cfa11d4130cdedb")
+  const [category, setCategory] = useState({ id: "", name: "" })
   const [productDescription, setProductDescription] = useState("")
   const [productQuantity, setProductQuantity] = useState("")
   const [merchantId, setMerchantId] = useState(route?.params?.merchantId)
+  const [categories, setCategories] = useState([])
 
   // const error = isSubmitted ? mobileNoValidationError : ""
   const error = ""
 
-  async function handleRegister() {
+  async function handleSubmit() {
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
 
@@ -70,7 +71,7 @@ export const AdminAddMerchantProductScreen: FC<
       const response = await apiAdmin.addProduct({
         productName,
         price,
-        categoryId,
+        categoryId: category.id,
         productDescription,
         productQuantity,
         merchantId,
@@ -83,21 +84,33 @@ export const AdminAddMerchantProductScreen: FC<
       setIsLoading(false)
     }
     setIsSubmitted(false)
-
-    // setAuthPassword("")
-    // setAuthMobileNo("")
-
-    // We'll mock this with a fake token.
-    // setAuthToken(String(Date.now()))
   }
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const response = await apiAdmin.getCategories()
+        if (response.kind === "ok") {
+          const transformed = response.categories.map((category) => ({
+            id: category._id,
+            name: category.categoryName,
+          }))
+
+          setCategories(transformed)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    })()
+  }, [])
 
   return (
     <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
       {isLoading && <ActivityIndicator />}
-      <Text testID="add-merchant-heading" text="Add Product" preset="heading" style={$signIn} />
+      <Text testID="add-merchant-heading" text="Add Product" preset="subheading" style={$signIn} />
       <Text
         text="Enter merchant's produc'ts below to continue"
-        preset="subheading"
+        preset="bold"
         style={$enterDetails}
       />
       <ScrollView>
@@ -129,16 +142,18 @@ export const AdminAddMerchantProductScreen: FC<
           onSubmitEditing={() => categoryIdInput.current?.focus()}
         />
 
-        <TextField
-          value={categoryId}
-          onChangeText={setCategoryId}
+        {/* TODO */}
+        <CustomDropdown
+          list={categories}
+          value={category.id}
+          onSelect={setCategory}
           containerStyle={$textField}
           autoCapitalize="none"
           autoComplete="off"
           autoCorrect={false}
           keyboardType="number-pad"
           label="Select Category"
-          placeholder="Enter category"
+          placeholder={category.name || "Select from dropdown"}
           helper={error}
           status={error ? "error" : undefined}
           onSubmitEditing={() => productDescriptionInput.current?.focus()}
@@ -165,7 +180,7 @@ export const AdminAddMerchantProductScreen: FC<
           autoCorrect={false}
           label="Product Quantity"
           placeholder="Enter product quantity"
-          onSubmitEditing={handleRegister}
+          onSubmitEditing={handleSubmit}
         />
 
         <Button
@@ -173,7 +188,7 @@ export const AdminAddMerchantProductScreen: FC<
           text="Submit"
           style={$tapButton}
           preset="reversed"
-          onPress={handleRegister}
+          onPress={handleSubmit}
         />
       </ScrollView>
     </Screen>
@@ -196,7 +211,7 @@ const $tapButton: ViewStyle = {
 }
 
 const $signIn: TextStyle = {
-  marginBottom: spacing.small,
+  marginBottom: spacing.tiny,
 }
 
 const $enterDetails: TextStyle = {
@@ -204,5 +219,5 @@ const $enterDetails: TextStyle = {
 }
 
 const $textField: ViewStyle = {
-  marginBottom: spacing.large,
+  marginBottom: spacing.medium,
 }

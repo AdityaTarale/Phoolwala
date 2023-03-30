@@ -120,12 +120,8 @@ export const AdminAddMerchantScreen: FC<
   return (
     <Screen style={$root} preset="scroll" contentContainerStyle={$container}>
       {isLoading && <ActivityIndicator />}
-      <Text testID="add-merchant-heading" text="Add Merchant" preset="heading" style={$signIn} />
-      <Text
-        text="Enter merchant's details below to continue"
-        preset="subheading"
-        style={$enterDetails}
-      />
+      <Text testID="add-merchant-heading" text="Add Merchant" preset="subheading" style={$signIn} />
+      <Text text="Enter merchant's details below to continue" preset="bold" style={$enterDetails} />
       <ScrollView>
         <TextField
           value={merchantName}
@@ -250,7 +246,7 @@ const $tapButton: ViewStyle = {
 }
 
 const $signIn: TextStyle = {
-  marginBottom: spacing.small,
+  marginBottom: spacing.tiny,
 }
 
 const $enterDetails: TextStyle = {
@@ -258,5 +254,5 @@ const $enterDetails: TextStyle = {
 }
 
 const $textField: ViewStyle = {
-  marginBottom: spacing.large,
+  marginBottom: spacing.medium,
 }

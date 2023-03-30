@@ -195,7 +195,7 @@ const $screenContentContainer: ViewStyle = {
 }
 
 const $signIn: TextStyle = {
-  marginBottom: spacing.small,
+  marginBottom: spacing.tiny,
 }
 
 const $enterDetails: TextStyle = {
@@ -208,7 +208,7 @@ const $hint: TextStyle = {
 }
 
 const $textField: ViewStyle = {
-  marginBottom: spacing.large,
+  marginBottom: spacing.medium,
 }
 
 const $tapButton: ViewStyle = {
