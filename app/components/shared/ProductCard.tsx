@@ -46,14 +46,15 @@ export function ProductCard(props: ProductCardProps) {
         <Box
           flexDirection="column"
           alignItems="flex-start"
-          padding={8}
+          paddingVertical={8}
+          paddingHorizontal={4}
           justifyContent="space-between"
         >
           <Box>
             <Text>{title}</Text>
             <Text>{description}</Text>
+            <Text>₹{price}/-</Text>
             <Text>{details}</Text>
-            <Text>₹{price}</Text>
           </Box>
         </Box>
         <Box

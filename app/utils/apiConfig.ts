@@ -4,6 +4,7 @@ export const API_URL = {
   register: () => "/users/register",
 
   // User
+  getDashboardData: () => "/dashboard/getalldashboardforuser",
 
   // Admin
   getProducts: () => "/products/getProduct",

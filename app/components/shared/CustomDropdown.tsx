@@ -186,7 +186,6 @@ export const CustomDropdown = forwardRef(function TextField(
   const [clicked, setClicked] = useState(false)
 
   const renderItem = ({ item }) => {
-    console.log(item)
     return (
       <TouchableOpacity
         style={[$dropdownItem, value === item.id && $selectedItem]}

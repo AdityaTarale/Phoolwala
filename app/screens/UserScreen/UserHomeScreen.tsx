@@ -1,13 +1,14 @@
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { Dimensions, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../../navigators"
-import { AutoImage, Box, ProductListHorizontal, Screen } from "../../components"
+import { AutoImage, Box, ImageSlider, ProductListHorizontal, Screen } from "../../components"
 import { spacing } from "../../theme"
 import { useHeader } from "../../utils/useHeader"
 import { CategoryList } from "../../components/User/CategoryList"
 import { SearchBar } from "../../components/User/SearchBar"
+import { useStores } from "../../models"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -25,6 +26,20 @@ export const UserHomeScreen: FC<StackScreenProps<AppStackScreenProps, "UserHome"
     const goTo = () => {
       //
     }
+
+    const {
+      userDashboardStore: { getDashboard, bannerImage },
+      authenticationStore: { user },
+    } = useStores()
+    console.log(user)
+
+    useEffect(() => {
+      ;(async () => {
+        getDashboard()
+      })()
+    }, [])
+
+    console.log("line 48", bannerImage)
 
     const { width } = Dimensions.get("window")
 
@@ -47,20 +62,14 @@ export const UserHomeScreen: FC<StackScreenProps<AppStackScreenProps, "UserHome"
         contentContainerStyle={$container}
       >
         <SearchBar />
-        <Box>
-          <AutoImage
-            maxWidth={width - spacing.large - spacing.large}
-            source={{
-              uri: "https://i.pinimg.com/originals/5e/c1/e4/5ec1e4334c19f6310a1edb1ca71e94a0.jpg",
-            }}
-          />
-        </Box>
+        <ImageSlider
+          items={bannerImage.map((image) => ({ id: image.fieldname, imageUrl: image.path }))}
+        />
         <CategoryList />
         <Box>
-          <ProductListHorizontal products={products} title="Today's Deal" />
-          <ProductListHorizontal products={products} title="Early offer" />
-          <ProductListHorizontal products={products} title="Best Seller" />
-          <ProductListHorizontal products={products} title="Months special" />
+          <ProductListHorizontal products={products} title="Daily's Deal" />
+          <ProductListHorizontal products={products} title="Weekly offer" />
+          <ProductListHorizontal products={products} title="Monthly special" />
         </Box>
       </Screen>
     )

@@ -4,7 +4,7 @@
 |--------------------------------------------------
 */
 
-import React from "react"
+import React, { useEffect } from "react"
 import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { CompositeScreenProps } from "@react-navigation/native"
 import { TextStyle, ViewStyle } from "react-native"
